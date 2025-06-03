@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime Recommender</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: 1px solid #add8e6;
+    }
+
+    button {
+      background-color: #87cefa;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+
+    #loadingIndicator {
+      display: none;
+      margin-top: 10px;
+    }
+
+    #nameList {
+      margin-top: 20px;
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    #nameList li {
+      padding: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Ask for Anime Recommendations</h2>
+  <input type="text" id="textInput" placeholder="Type your question here" />
+  <button id="sendButton">Send</button>
+  <div id="loadingIndicator">Processing...</div>
+  <div id="tableContainer"></div>
+
+  <script>
+    const sendButton = document.getElementById("sendButton");
+    const loadingIndicator = document.getElementById("loadingIndicator");
+    const tableContainer = document.getElementById("tableContainer");
+
+    sendButton.addEventListener("click", function () {
+      const textInput = document.getElementById("textInput").value;
+
+      sendButton.disabled = true;
+      loadingIndicator.style.display = "block";
+      tableContainer.innerHTML = "";
+
+      fetch("/process", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: textInput }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          displayNames(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          tableContainer.innerHTML = "<p>Error fetching names.</p>";
+        })
+        .finally(() => {
+          sendButton.disabled = false;
+          loadingIndicator.style.display = "none";
+        });
+    });
+
+    function displayNames(names) {
+      if (!names || names.length === 0) {
+        tableContainer.innerHTML = "<p>No names found.</p>";
+        return;
+      }
+
+      let listHTML = "<ul id='nameList'>";
+      for (const name of names) {
+        listHTML += `<li>${name}</li>`;
+      }
+      listHTML += "</ul>";
+      tableContainer.innerHTML = listHTML;
+    }
+  </script>
+</body>
+</html>
