@@ -8,16 +8,16 @@ steps:
         gcloud secrets versions access latest --secret="APP_ENV" > .env
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/anime-recommender', '.']
+    args: ['build', '-t', 'gcr.io/imperial-medium-461815-j1/anime-recommender', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/anime-recommender']
+    args: ['push', 'gcr.io/imperial-medium-461815-j1/anime-recommender']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args:
       [
         'gcloud', 'run', 'deploy', 'anime-recommender',
-        '--image', 'gcr.io/$PROJECT_ID/anime-recommender',
+        '--image', 'gcr.io/imperial-medium-461815-j1/anime-recommender',
         '--region', 'us-central1',
         '--platform', 'managed',
         '--allow-unauthenticated',
