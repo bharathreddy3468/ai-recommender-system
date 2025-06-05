@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy all necessary files
 COPY main.py database.py rag_chain.py requirements.txt ./
-COPY templates/ ./templates/
+COPY src/ ./src/
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
