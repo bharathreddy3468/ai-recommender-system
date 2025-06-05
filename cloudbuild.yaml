@@ -1,25 +1,46 @@
 steps:
+  # Step 1: Pull secret from Secret Manager and write it into a .env file
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # Fetch the secret and write to .env file
+        echo "Fetching secrets..."
         gcloud secrets versions access latest --secret="APP_ENV" > .env
 
+  # Step 2: Build Docker image using Artifact Registry naming
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/imperial-medium-461815-j1/anime-recommender', '.']
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/imperial-medium-461815-j1/recommender/anime-recommender'
+      - '.'
 
+  # Step 3: Push the Docker image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/imperial-medium-461815-j1/anime-recommender']
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/imperial-medium-461815-j1/recommender/anime-recommender'
 
+  # Step 4: Deploy to Cloud Run with secrets attached
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args:
-      [
-        'gcloud', 'run', 'deploy', 'anime-recommender',
-        '--image', 'gcr.io/imperial-medium-461815-j1/anime-recommender',
-        '--region', 'us-central1',
-        '--platform', 'managed',
-        '--allow-unauthenticated',
-        '--set-secrets', 'APP_ENV=APP_ENV:latest'
-      ]
+      - 'gcloud'
+      - 'run'
+      - 'deploy'
+      - 'anime-recommender'
+      - '--image'
+      - 'us-central1-docker.pkg.dev/imperial-medium-461815-j1/recommender/anime-recommender'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--set-secrets'
+      - 'APP_ENV=APP_ENV:latest'
+
+# Optional: set a timeout (default is 600s)
+timeout: '900s'
+
+# Optional: specify the Artifact Registry service account permissions
+# available if you need custom access control
