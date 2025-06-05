@@ -1,3 +1,7 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+
 steps:
   # Step 1: Pull secret from Secret Manager and write it into a .env file
   - name: 'gcr.io/cloud-builders/gcloud'
