@@ -11,8 +11,8 @@ from langchain_core.runnables import RunnablePassthrough, RunnableMap
 
 
 
-load_dotenv()
-groq_api_key=os.getenv("GROQ_API_KEY")
+# load_dotenv()
+groq_api_key = os.environ["GROQ_API_KEY"]
 
 
 llm1 = ChatGroq(groq_api_key=groq_api_key,model_name="gemma2-9b-it")

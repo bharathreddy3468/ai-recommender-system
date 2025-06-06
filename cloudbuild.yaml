@@ -41,7 +41,7 @@ steps:
       - 'managed'
       - '--allow-unauthenticated'
       - '--set-secrets'
-      - 'APP_ENV=APP_ENV:latest'
+      - 'GROQ_API_KEY=GROQ_API_KEY:latest'
 
 # Optional: set a timeout (default is 600s)
 timeout: '900s'
