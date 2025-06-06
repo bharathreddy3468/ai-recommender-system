@@ -1,0 +1,13 @@
+pandas
+numpy
+langchain
+scikit-learn
+matplotlib
+seaborn
+groq
+langchain_groq
+dotenv
+sentence-transformers
+chromadb
+langchain-community
+langchain-huggingface
