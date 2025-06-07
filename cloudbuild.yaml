@@ -33,8 +33,11 @@ steps:
       - '--allow-unauthenticated'
       - '--update-secrets'
       - 'GROQ_API_KEY=GROQ_API_KEY:latest'
+      - '--update-secrets'
       - 'neo_username=neo_username:latest'
+      - '--update-secrets'
       - 'neo_password=neo_password:latest'
+      - '--update-secrets'
       - 'LANGCHAIN_API_KEY=LANGCHAIN_API_KEY:latest'
 # Optional: set a timeout (default is 600s)
 timeout: '1200s'
