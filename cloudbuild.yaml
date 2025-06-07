@@ -32,13 +32,10 @@ steps:
       - 'managed'
       - '--allow-unauthenticated'
       - '--set-secrets'
-      - 'GROQ_API_KEY=GROQ_API_KEY:latest'
-      - 'neo_username=neo_username:latest'
-      - 'neo_password=neo_password:latest'
-      - 'LANGCHAIN_API_KEY=LANGCHAIN_API_KEY:latest'
+      - 'GROQ_API_KEY=GROQ_API_KEY:latest, neo_username=neo_username:latest, neo_password=neo_password:latest, LANGCHAIN_API_KEY=LANGCHAIN_API_KEY:latest'
 
 # Optional: set a timeout (default is 600s)
-timeout: '900s'
+timeout: '1200s'
 
 # Optional: specify the Artifact Registry service account permissions
 # available if you need custom access control
