@@ -45,7 +45,7 @@ def normalize_response(result):
     return [str(result)]
 
 def main():
-    app.run(port=int(os.environ.get('PORT', 80)), debug=True)
+    app.run(port=int(os.environ.get('PORT', 8080)), debug=True)
 
 if __name__ == "__main__":
     main()

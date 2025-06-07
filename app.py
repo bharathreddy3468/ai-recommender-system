@@ -1,19 +1,18 @@
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
-from langchain.chains.sequential import SimpleSequentialChain
-from langchain.chains import LLMChain
+# from langchain.chains.sequential import SimpleSequentialChain
+# from langchain.chains import LLMChain
 from langchain_core.output_parsers import StrOutputParser
 import re
-from database import database
+# from database import database
 from langchain_core.runnables import RunnablePassthrough, RunnableMap
 
 
 
 # load_dotenv()
-groq_api_key = os.environ["GROQ_API_KEY"]
-
+groq_api_key = os.getenv("GROQ_API_KEY")
 
 llm1 = ChatGroq(groq_api_key=groq_api_key,model_name="gemma2-9b-it")
 llm2=ChatGroq(groq_api_key=groq_api_key,model_name="Llama3-70b-8192")

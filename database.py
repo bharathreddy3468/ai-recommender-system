@@ -1,9 +1,9 @@
 from neo4j import GraphDatabase
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 
-load_dotenv()
+# load_dotenv()
 # Replace with your actual Aura DB credentials
 uri = "neo4j+s://54cfbb3b.databases.neo4j.io"
 username = os.getenv("neo_username")
