@@ -31,8 +31,11 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
-      - --mount
-      - /secrets/app_env=secrets:APP_ENV
+      - '--update-secrets'
+      - 'GROQ_API_KEY=GROQ_API_KEY:latest'
+      - 'NEO_USERNAME=NEO_USERNAME:latest'
+      - 'NEO_PASSWORD=NEO_PASSWORD:latest'
+      - 'LANGCHAIN_API_KEY=LANGCHAIN_API_KEY:latest'
 # Optional: set a timeout (default is 600s)
 timeout: '1200s'
 
