@@ -1,5 +1,5 @@
 import os
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 # from langchain.chains.sequential import SimpleSequentialChain
@@ -10,8 +10,13 @@ import re
 from langchain_core.runnables import RunnablePassthrough, RunnableMap
 
 
+# Load environment variables from secret file if available
+if os.path.exists("/secrets/app_env"):
+    load_dotenv("/secrets/app_env")
+else:
+    # fallback for local testing
+    load_dotenv(".env")
 
-# load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
 
 llm1 = ChatGroq(groq_api_key=groq_api_key,model_name="gemma2-9b-it")

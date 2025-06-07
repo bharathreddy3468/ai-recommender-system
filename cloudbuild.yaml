@@ -31,9 +31,8 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
-      - '--set-secrets'
-      - 'GROQ_API_KEY=GROQ_API_KEY:latest, neo_username=neo_username:latest, neo_password=neo_password:latest, LANGCHAIN_API_KEY=LANGCHAIN_API_KEY:latest'
-
+      - --mount
+      - /secrets/app_env=secrets:APP_ENV
 # Optional: set a timeout (default is 600s)
 timeout: '1200s'
 
