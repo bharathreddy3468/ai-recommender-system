@@ -43,4 +43,4 @@ steps:
       - '--member=allUsers'
       - '--role=roles/run.invoker'
 
-timeout: '1200s'
+timeout: '12000s'
