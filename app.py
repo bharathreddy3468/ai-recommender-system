@@ -1,12 +1,7 @@
 import os
-# from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
-# from langchain.chains.sequential import SimpleSequentialChain
-# from langchain.chains import LLMChain
 from langchain_core.output_parsers import StrOutputParser
-import re
-# from database import database
 from langchain_core.runnables import RunnablePassthrough, RunnableMap
 
 groq_api_key = os.getenv("GROQ_API_KEY")
